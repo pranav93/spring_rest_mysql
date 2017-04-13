@@ -16,12 +16,12 @@ public class MainController {
     private UserRepository userRepository;
 
     @GetMapping(path="/add")
-    public @ResponseBody String addNewUser (@RequestParam String name, @RequestParam String email) {
+    public @ResponseBody User addNewUser (@RequestParam String name, @RequestParam String email) {
         User n = new User();
         n.setName(name);
         n.setEmail(email);
         this.userRepository.save(n);
-        return "Saved";
+        return n;
     }
 
     @GetMapping(path="/all")
