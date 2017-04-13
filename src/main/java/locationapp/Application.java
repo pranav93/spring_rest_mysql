@@ -1,4 +1,4 @@
-package hello;
+package locationapp;
 
 import org.springframework.boot.SpringApplication;
 
