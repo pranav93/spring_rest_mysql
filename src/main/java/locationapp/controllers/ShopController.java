@@ -30,7 +30,7 @@ public class ShopController {
     }
 
     @GetMapping(path="/closest")
-    public @ResponseBody Iterable<Object[]> getClosest(@RequestParam Double selectedLat, @RequestParam Double selectedLong) {
+    public @ResponseBody Iterable<Shop> getClosest(@RequestParam Double selectedLat, @RequestParam Double selectedLong) {
         return this.shopService.findClosest(selectedLat, selectedLong);
     }
 
