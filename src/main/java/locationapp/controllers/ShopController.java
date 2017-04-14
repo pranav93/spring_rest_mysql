@@ -16,22 +16,22 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @RequestMapping(path="/shops")
 public class ShopController {
     @Autowired
-    ShopBusiness sb;
+    ShopBusiness shopService;
 
     @GetMapping(path="/add")
     public @ResponseBody Shop addNewShop (@RequestParam String name, @RequestParam String addressName) {
-        Shop s = sb.createOrUpdateShop(name, addressName);
-        return s;
+        Shop shop = shopService.createOrUpdateShop(name, addressName);
+        return shop;
     }
 
     @GetMapping(path="/all")
     public @ResponseBody Iterable<Shop> getAllShops() {
-        return this.sb.getAllShops();
+        return this.shopService.getAllShops();
     }
 
     @GetMapping(path="/closest")
     public @ResponseBody Iterable<Shop> getClosest() {
-        return this.sb.getAllShops();
+        return this.shopService.getAllShops();
     }
 
 }
