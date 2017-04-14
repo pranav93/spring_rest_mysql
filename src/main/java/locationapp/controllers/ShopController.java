@@ -1,6 +1,7 @@
 package locationapp.controllers;
 
-import com.google.maps.errors.ApiException;
+import com.google.maps.model.Geometry;
+import locationapp.Utils.GeoApi;
 import locationapp.models.Shop;
 import locationapp.models.ShopRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,11 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.google.maps.GeocodingApi;
-import com.google.maps.GeoApiContext;
-import com.google.maps.model.GeocodingResult;
-
-import java.io.IOException;
 import java.util.List;
 
 /**
@@ -29,38 +25,29 @@ public class ShopController {
     @GetMapping(path="/add")
     public @ResponseBody Shop addNewShop (@RequestParam String name, @RequestParam String addressName) {
         List<Shop> x;
+
+
         x = shopRepository.getShopByName(name);
 
         System.out.println(x);
 
-        GeoApiContext context = new GeoApiContext().setApiKey("apiKey");
-        GeocodingResult[] results = new GeocodingResult[0];
-        try {
-            results = GeocodingApi.geocode(context, addressName).await();
-        } catch (ApiException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        System.out.println(results[0].geometry.location.lat);
-        System.out.println(results[0].geometry.location.lng);
+        GeoApi geoApi = new GeoApi();
+        Geometry addressGeometry = geoApi.getGeoCodes(addressName);
 
         if(x.isEmpty()) {
             Shop n = new Shop();
             n.setName(name);
             n.setAddressName(addressName);
-            n.setAddressLang(results[0].geometry.location.lng);
-            n.setAddressLat(results[0].geometry.location.lat);
+            n.setAddressLang(addressGeometry.location.lng);
+            n.setAddressLat(addressGeometry.location.lat);
             this.shopRepository.save(n);
             return n;
         }
         else {
             Shop s = x.get(0);
             s.setAddressName(addressName);
-            s.setAddressLang(results[0].geometry.location.lng);
-            s.setAddressLat(results[0].geometry.location.lat);
+            s.setAddressLang(addressGeometry.location.lng);
+            s.setAddressLat(addressGeometry.location.lat);
             this.shopRepository.save(s);
             return s;
         }
