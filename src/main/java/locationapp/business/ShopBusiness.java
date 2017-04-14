@@ -48,9 +48,9 @@ public class ShopBusiness {
         return this.shopRepository.findAll();
     }
 
-    public Iterable<Integer> findClosest (Double selectedLat, Double selectedLong) {
+    public Iterable<Object[]> findClosest (Double selectedLat, Double selectedLong) {
         System.out.print("------------------------------------------LOL-------------------------");
-        Iterable<Integer> x;
+        Iterable<Object[]> x;
         x = this.shopRepository.getClosestShop(selectedLat, selectedLong);
         System.out.print(x);
         return x;
