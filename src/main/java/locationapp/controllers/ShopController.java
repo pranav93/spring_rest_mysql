@@ -27,7 +27,12 @@ public class ShopController {
     }
 
     @GetMapping(path="/all")
-    public @ResponseBody Iterable<Shop> getAllUsers() {
+    public @ResponseBody Iterable<Shop> getAllShops() {
+        return this.shopRepository.findAll();
+    }
+
+    @GetMapping(path="/closest")
+    public @ResponseBody Iterable<Shop> getClosest() {
         return this.shopRepository.findAll();
     }
 
