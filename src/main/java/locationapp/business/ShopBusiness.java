@@ -4,18 +4,18 @@ import com.google.maps.model.Geometry;
 import locationapp.Utils.GeoApi;
 import locationapp.models.Shop;
 import locationapp.models.ShopRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 /**
  * Created by pranav on 15/4/17.
  */
+@Service
 public class ShopBusiness {
+    @Autowired
     private ShopRepository shopRepository;
-
-    public ShopBusiness(ShopRepository shopRepository) {
-        this.shopRepository = shopRepository;
-    }
 
     public Shop createOrUpdateShop (String name, String addressName) {
         List<Shop> x;
@@ -42,6 +42,10 @@ public class ShopBusiness {
             this.shopRepository.save(s);
             return s;
         }
+    }
+
+    public Iterable<Shop> getAllShops () {
+        return this.shopRepository.findAll();
     }
 
 }
