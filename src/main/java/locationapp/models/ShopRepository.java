@@ -11,9 +11,9 @@ import java.util.List;
 public interface ShopRepository extends CrudRepository<Shop, Long> {
     @Modifying
     @Transactional
-    @Query("update Shop p set p.addressLang= :addressLang, p.addressLat= :addressLat, p.addressName= :addressName where p.name = :name")
+    @Query("update Shop p set p.addressLong= :addressLong, p.addressLat= :addressLat, p.addressName= :addressName where p.name = :name")
     Integer setNewDescriptionForProduct(
-            @Param("addressLang") Double addressLang,
+            @Param("addressLong") Double addressLong,
             @Param("addressLat") Double addressLat,
             @Param("addressName") String addressName,
             @Param("name") String name

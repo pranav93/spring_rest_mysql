@@ -29,7 +29,7 @@ public class ShopBusiness {
             Shop n = new Shop();
             n.setName(name);
             n.setAddressName(addressName);
-            n.setAddressLang(addressGeometry.location.lng);
+            n.setAddressLong(addressGeometry.location.lng);
             n.setAddressLat(addressGeometry.location.lat);
             this.shopRepository.save(n);
             return n;
@@ -37,7 +37,7 @@ public class ShopBusiness {
         else {
             Shop s = x.get(0);
             s.setAddressName(addressName);
-            s.setAddressLang(addressGeometry.location.lng);
+            s.setAddressLong(addressGeometry.location.lng);
             s.setAddressLat(addressGeometry.location.lat);
             this.shopRepository.save(s);
             return s;

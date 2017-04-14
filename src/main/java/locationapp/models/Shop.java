@@ -19,7 +19,7 @@ public class Shop {
 
     private String addressName;
 
-    private Double addressLang;
+    private Double addressLong;
 
     private Double addressLat;
 
@@ -47,12 +47,12 @@ public class Shop {
         this.addressName = addressName;
     }
 
-    public Double getAddressLang() {
-        return this.addressLang;
+    public Double getAddressLong() {
+        return this.addressLong;
     }
 
-    public void setAddressLang(Double addressLang) {
-        this.addressLang = addressLang;
+    public void setAddressLong(Double addressLong) {
+        this.addressLong = addressLong;
     }
 
     public Double getAddressLat() {
