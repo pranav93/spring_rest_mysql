@@ -17,13 +17,15 @@ public class ShopBusiness {
     @Autowired
     private ShopRepository shopRepository;
 
+    @Autowired
+    private GeoApi geoApi;
+
     public Shop createOrUpdateShop (String name, String addressName) {
         List<Shop> x;
 
         x = this.shopRepository.getShopByName(name);
 
-        GeoApi geoApi = new GeoApi();
-        Geometry addressGeometry = geoApi.getGeoCodes(addressName);
+        Geometry addressGeometry = this.geoApi.getGeoCodes(addressName);
 
         if(x.isEmpty()) {
             Shop n = new Shop();
