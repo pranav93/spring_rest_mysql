@@ -24,7 +24,7 @@ go to the javaDoc repo and run
 ```
 python -m SimpleHTTPServer
 ```
-Open `localhost:8080` in the browser
+Open `localhost:8000` in the browser
 
 ## What about unit testing?
 ```
