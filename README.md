@@ -26,4 +26,10 @@ python -m SimpleHTTPServer
 ```
 Open `localhost:8080` in the browser
 
+## What about unit testing?
+```
+./gradlew test
+```
+Being a noob in Spring boot :(, Still struggling with setting up the project tests, getting `unable to find out the reason behin org.springframework.beans.factory.NoSuchBeanDefinitionException`, tests will be updated as soon as I get the solution.
+
 P.S. The Google maps api token is added in repo for convenience. In case the api token does not work (most probably I might have disabled it), generate the api token and add it in application properties.
