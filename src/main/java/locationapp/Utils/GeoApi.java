@@ -19,11 +19,20 @@ public class GeoApi {
 
     private static GeoApiContext context;
 
+    /**
+     * Constructor to initialize context
+     * @param prop secret for maps API
+     */
     @Autowired
     public GeoApi(@Value("${gmaps.secret}") String prop) {
         context = new GeoApiContext().setApiKey(prop);
     }
 
+    /**
+     * This method gets the geocodes for an address line
+     * @param addressName the address line
+     * @return Geometry the geocodes information
+     */
     public Geometry getGeoCodes(String addressName) {
         GeocodingResult[] results = new GeocodingResult[0];
         try {

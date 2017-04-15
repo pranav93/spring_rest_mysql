@@ -20,6 +20,12 @@ public class ShopBusiness {
     @Autowired
     private GeoApi geoApi;
 
+    /**
+     * Methos that creates a new shop, or updates it if it exists
+     * @param name the name of the shop
+     * @param addressName the address line of the shop
+     * @return Shop the shop that is added or updated
+     */
     public Shop createOrUpdateShop (String name, String addressName) {
         List<Shop> x;
 
@@ -46,10 +52,20 @@ public class ShopBusiness {
         }
     }
 
+    /**
+     * Method to get all the shops
+     * @return Iterable<Shop> shop list
+     */
     public Iterable<Shop> getAllShops () {
         return this.shopRepository.findAll();
     }
 
+    /**
+     * This methods returns the nearest shop
+     * @param selectedLat the latitude given by user
+     * @param selectedLong the longitude given by user
+     * @return <Iterable>Shop the nearest shop list
+     */
     public Iterable<Shop> findClosest (Double selectedLat, Double selectedLong) {
         return this.shopRepository.getClosestShop(selectedLat, selectedLong);
     }
