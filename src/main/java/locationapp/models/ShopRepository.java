@@ -17,6 +17,7 @@ public interface ShopRepository extends CrudRepository<Shop, Long> {
 
     /**
      * It gets all shops by a name
+     *
      * @param name name of the shop
      * @return List<Shop> All shops with given name
      */
@@ -27,11 +28,12 @@ public interface ShopRepository extends CrudRepository<Shop, Long> {
 
     /**
      * Query to get the nearest shop
-     * @param selectedLat the latitude by user
+     *
+     * @param selectedLat  the latitude by user
      * @param selectedLong the longitude by user
      * @return List<Shop> the list of a single shop which is nearest
      */
-    @Query(value=closestShopQuery, nativeQuery=true)
+    @Query(value = closestShopQuery, nativeQuery = true)
     List<Shop> getClosestShop(Double selectedLat, Double selectedLong);
 
 }

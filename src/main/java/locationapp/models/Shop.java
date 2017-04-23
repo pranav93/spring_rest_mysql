@@ -13,7 +13,7 @@ import java.util.Objects;
 @Entity
 public class Shop {
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
     private String name;
@@ -64,18 +64,18 @@ public class Shop {
         this.addressLat = addressLat;
     }
 
-    public int hashCode(){
+    public int hashCode() {
         return this.id;
     }
 
-    public boolean equals(Object obj){
+    public boolean equals(Object obj) {
         Shop shop = (Shop) obj;
         boolean status = false;
-        if(this.name.equalsIgnoreCase(shop.name)
+        if (this.name.equalsIgnoreCase(shop.name)
                 && Objects.equals(this.id, shop.id)
                 && Objects.equals(this.addressLat, shop.addressLat)
                 && Objects.equals(this.addressLong, shop.addressLong)
-                && Objects.equals(this.addressName, shop.addressName)){
+                && Objects.equals(this.addressName, shop.addressName)) {
             status = true;
         }
         return status;
