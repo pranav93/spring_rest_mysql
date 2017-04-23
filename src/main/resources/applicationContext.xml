@@ -8,6 +8,6 @@
 
     <context:component-scan base-package="locationapp" />
 
-    <context:property-placeholder location="classpath:application.properties" />
+    <context:property-placeholder location="classpath:testApplication.properties" />
 
 </beans>

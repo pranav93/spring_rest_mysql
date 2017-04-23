@@ -2,16 +2,16 @@ package locationapp.controllers;
 
 import locationapp.business.ShopBusiness;
 import locationapp.models.Shop;
+import locationapp.requestObjects.ShopRequestBody;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * Created by pranav on 13/4/17.
  */
+
+
 @Controller
 @RequestMapping(path="/shops")
 public class ShopController {
@@ -20,14 +20,12 @@ public class ShopController {
 
     /**
      * Api to add new shop
-     * @param name the name of the shop
-     * @param addressName the address line of the shop
+     * @param shopRequestBody ShopRequestBody with name and address name
      * @return Shop the shop that is added
      */
-    @GetMapping(path="/add")
-    public @ResponseBody Shop addNewShop (@RequestParam String name, @RequestParam String addressName) {
-        Shop shop = shopService.createOrUpdateShop(name, addressName);
-        return shop;
+    @PostMapping(path="/add")
+    public @ResponseBody Shop addNewShop (@RequestBody ShopRequestBody shopRequestBody) {
+        return shopService.createOrUpdateShop(shopRequestBody.name, shopRequestBody.addressName);
     }
 
     /**

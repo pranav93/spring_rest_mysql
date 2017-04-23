@@ -21,6 +21,7 @@ public class GeoApi {
 
     /**
      * Constructor to initialize context
+     *
      * @param prop secret for maps API
      */
     @Autowired
@@ -30,6 +31,7 @@ public class GeoApi {
 
     /**
      * This method gets the geocodes for an address line
+     *
      * @param addressName the address line
      * @return Geometry the geocodes information
      */
@@ -44,9 +46,6 @@ public class GeoApi {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        System.out.println(results[0].geometry.location.lat);
-        System.out.println(results[0].geometry.location.lng);
-
         return results[0].geometry;
 
     }
