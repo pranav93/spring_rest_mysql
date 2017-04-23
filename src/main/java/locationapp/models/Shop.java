@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.util.Objects;
 
 /**
  * Created by pranav on 13/4/17.
@@ -61,6 +62,23 @@ public class Shop {
 
     public void setAddressLat(Double addressLat) {
         this.addressLat = addressLat;
+    }
+
+    public int hashCode(){
+        return this.id;
+    }
+
+    public boolean equals(Object obj){
+        Shop shop = (Shop) obj;
+        boolean status = false;
+        if(this.name.equalsIgnoreCase(shop.name)
+                && Objects.equals(this.id, shop.id)
+                && Objects.equals(this.addressLat, shop.addressLat)
+                && Objects.equals(this.addressLong, shop.addressLong)
+                && Objects.equals(this.addressName, shop.addressName)){
+            status = true;
+        }
+        return status;
     }
 
 }
