@@ -3,3 +3,4 @@ locationapp.Utils
 locationapp.business
 locationapp.controllers
 locationapp.models
+locationapp.requestObjects
