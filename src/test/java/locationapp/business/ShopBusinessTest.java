@@ -12,6 +12,7 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -23,6 +24,7 @@ import static org.junit.Assert.assertArrayEquals;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations="/applicationContext.xml")
+@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 public class ShopBusinessTest {
 
     @Autowired
@@ -105,6 +107,7 @@ public class ShopBusinessTest {
         assertEquals(30.00, shop_shoppers_new.getAddressLat());
         assertEquals(40.00, shop_shoppers_new.getAddressLong());
     }
+
     @Test
     public void getAllShopsShouldReturnShopFromService() throws Exception {
         Double x = 10.0000;
@@ -153,6 +156,74 @@ public class ShopBusinessTest {
 
         expectedShopList.add(shop);
         expectedShopList.add(shop2);
+
+        assertArrayEquals(expectedShopList.toArray(), shopList.toArray());
+    }
+
+    @Test
+    public void findClosestShouldReturnNearestShopFromService() throws Exception {
+        Double x = 10.0000;
+        Double y = 10.0000;
+
+        Geometry addressGeometry = new Geometry();
+        addressGeometry.location = new LatLng(x, y);
+
+        Mockito.when(geoApi.getGeoCodes("dmart")).thenReturn(addressGeometry);
+
+
+        Shop shop = new Shop();
+
+        shop.setId(1);
+        shop.setName("dmart");
+        shop.setAddressName("dmart");
+        shop.setAddressLat(10.00);
+        shop.setAddressLong(10.00);
+
+        Shop shop_dmart = shopService.createOrUpdateShop("dmart", "dmart");
+
+        x = 20.0000;
+        y = 20.0000;
+
+        addressGeometry = new Geometry();
+        addressGeometry.location = new LatLng(x, y);
+
+        Mockito.when(geoApi.getGeoCodes("shoppers")).thenReturn(addressGeometry);
+
+        Shop shop2 = new Shop();
+        shop2.setId(2);
+        shop2.setName("shoppers");
+        shop2.setAddressName("shoppers");
+        shop2.setAddressLat(20.00);
+        shop2.setAddressLong(20.00);
+
+        Shop shop_shoppers = shopService.createOrUpdateShop("shoppers", "shoppers");
+
+        x = 40.0000;
+        y = 40.0000;
+
+        addressGeometry = new Geometry();
+        addressGeometry.location = new LatLng(x, y);
+
+        Mockito.when(geoApi.getGeoCodes("CCD")).thenReturn(addressGeometry);
+
+        Shop shop3 = new Shop();
+        shop3.setId(3);
+        shop3.setName("cafeCoffeeDay");
+        shop3.setAddressName("CCD");
+        shop3.setAddressLat(40.00);
+        shop3.setAddressLong(40.00);
+
+        Shop shop_cafe = shopService.createOrUpdateShop("cafeCoffeeDay", "CCD");
+
+        Iterable<Shop> shopIterable;
+        List<Shop> shopList = new ArrayList<Shop>();
+        List<Shop> expectedShopList = new ArrayList<Shop>();
+
+        shopIterable = shopService.findClosest(35.1324, 34.9876);
+
+        shopIterable.forEach(shopList::add);
+
+        expectedShopList.add(shop3);
 
         assertArrayEquals(expectedShopList.toArray(), shopList.toArray());
     }
